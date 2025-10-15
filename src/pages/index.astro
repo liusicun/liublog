@@ -1,11 +1,128 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Nothing lasts, but I still care. — Alex">
+  <!-- 首页导航：只显示 About -->
+  <a slot="nav" href="/about">About</a>
+
+  <main class="wrap">
+    <section class="grid">
+      <div>
+        <h1>Nothing lasts,<br />but I still care.</h1>
+      </div>
+      <div class="lead">
+        I create knowing it won’t remain — every image, every word, dissolves into time.
+        Still, I continue, because the act of caring itself feels human enough.
+      </div>
+    </section>
+
+    <figure class="figure">
+      <picture>
+        <source srcset="/photo-1200.webp 1200w" type="image/webp" />
+        <source srcset="/photo-1200.jpg 1200w, /photo.jpg 2048w" type="image/jpeg" />
+        <img
+          src="/photo.jpg"
+          loading="lazy"
+          width="2048"
+          height="1365"
+          alt="Photograph by Alex — night street from a moving car"
+          sizes="(max-width: 980px) 100vw, 1200px"
+          srcset="/photo-1200.jpg 1200w, /photo.jpg 2048w"
+        />
+      </picture>
+    </figure>
+  </main>
+
+  <footer class="foot">made by alex — echoes of what was never said</footer>
+
+  <style>
+    :root {
+      --bg: #1f2225;
+      --fg: #e9ecef;
+      --muted: #d2d8de;
+      --max: 1200px;
+      --link: #bcd4e6;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 110px 32px 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 64px;
+      align-items: start;
+    }
+    h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(40px, 6vw, 72px);
+      letter-spacing: 0.01em;
+      line-height: 1.08;
+      margin: 0 0 24px;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: fade 0.8s ease 0.1s both;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: clamp(16px, 1.6vw, 18px);
+      line-height: 1.9;
+      max-width: 620px;
+      margin-top: 200px;
+      animation: fade 0.8s ease 0.2s both;
+    }
+    .figure {
+      margin: 64px auto 32px;
+      max-width: var(--max);
+      padding: 0 32px;
+      position: relative;
+    }
+    picture {
+      display: block;
+      max-width: 100%;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+    .foot {
+      text-align: center;
+      max-width: var(--max);
+      margin: 60px auto 24px;
+      padding: 0 32px;
+      color: #8e99a3;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+    @keyframes fade {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .figure {
+        padding: 0 16px;
+        margin: 40px auto 24px;
+      }
+      .lead {
+        margin-top: 40px;
+      }
+    }
+  </style>
+</BaseLayout>

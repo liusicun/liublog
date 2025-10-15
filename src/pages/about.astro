@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About — Alex" description="About Alex — observation, composition, reduction.">
+  <!-- 本页导航：只显示 Home -->
+  <a slot="nav" href="/">Home</a>
+
+  <main class="wrap">
+    <div class="intro">
+      <h1>About</h1>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+
+    <section class="grid">
+      <div>
+        <p>I spend most of my time watching, listening, and trying to understand things that don’t really have answers. I like films, music, and the kind of silence that feels alive. I take photos sometimes, mostly out of habit — a way of saying <em>I was here</em> without actually being seen. Writing comes in the same way, when thoughts become too heavy to keep quiet.</p>
+        <p>I think too much, and I care about things that fade too quickly. People, light, small sounds — they all pass, but I keep watching anyway. It’s not about meaning, or purpose. I just like the idea that attention itself is a form of tenderness.</p>
+        <p>I’m not interested in perfection, only in the small moments when something feels real, even if it’s gone the next second. Maybe that’s all I’m trying to do — to notice, before it disappears.</p>
+      </div>
+
+      <!-- 中列：竖版照片 -->
+      <figure class="about-photo">
+        <img src="/about-portrait.jpg" alt="Portrait by Alex" />
+      </figure>
+
+      <!-- 右列：信息卡片 -->
+      <aside class="aside">
+        <div class="meta">
+          <div><div class="label">Based</div><div class="val">Currently somewhere between silence and light</div></div>
+          <div><div class="label">Practice</div><div class="val">Observation, Composition, Reduction</div></div>
+          <div><div class="label">Focus</div><div class="val">Light, Rhythm, Proportion</div></div>
+          <div><div class="label">Hobbies</div><div class="val">Film, Music, Photography</div></div>
+          <div><div class="label">Food</div><div class="val">Anything quiet, preferably with Coke</div></div>
+          <div><div class="label">Instagram</div><div class="val"><a href="https://www.instagram.com/ryu_scsc" target="_blank">@ryu_scsc</a></div></div>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="foot">made by alex — echoes of what was never said</footer>
+  </main>
+
+  <style>
+    :root{
+      --bg:#1f2225; --fg:#e9ecef; --muted:#c9d1d9; --link:#bcd4e6; --rule:#2a2e32; --max:1200px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:110px 32px 40px}
+    .intro{margin-bottom:24px}
+
+    h1{
+      font-family:'Playfair Display',serif;
+      font-weight:600;
+      font-size:clamp(42px,6vw,72px);
+      letter-spacing:.01em;
+      line-height:1.08;
+      margin:0 0 10px;
+      opacity:0; transform:translateY(8px);
+      animation:fade .8s ease .1s both;
+    }
+    @keyframes fade{to{opacity:1;transform:none}}
+
+    .rule{height:1px;background:linear-gradient(90deg,transparent,var(--rule),transparent);margin:20px 0 28px}
+
+    /* 三列布局（与原版保持一致） */
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr 0.8fr 0.8fr;
+      gap:64px;
+      align-items:stretch; /* 同行等高 */
+    }
+
+    p{max-width:720px;color:var(--muted);margin-bottom:18px;font-size:17px}
+
+    /* 中列照片卡 & 右列信息卡 —— 风格与尺寸一致 */
+    .about-photo,
+    .aside{
+      height:100%;
+      max-width:340px;
+      border:1px solid var(--rule);
+      border-radius:16px;
+      box-shadow:0 8px 22px rgba(0,0,0,.25);
+      transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      background:transparent;
+    }
+
+    .about-photo{ margin:0; overflow:hidden; display:flex; }
+    .about-photo img{
+      width:100%; height:100%;
+      object-fit:cover;          /* 填满裁切，保持构图 */
+      display:block; border-radius:16px;
+    }
+
+    .aside{ padding:18px 18px 14px; }
+    .meta{ display:grid; gap:10px; }
+
+    .label{ color:#8e99a3; letter-spacing:.08em; text-transform:uppercase; font-size:11px }
+    .val{ color:var(--fg) }
+
+    a{ color:var(--link); text-decoration:none; border-bottom:1px solid transparent; transition:border .2s ease }
+    a:hover{ border-bottom-color:currentColor }
+
+    .about-photo:hover, .aside:hover{
+      transform:translateY(-2px) scale(1.02);
+      box-shadow:0 14px 34px rgba(0,0,0,.38);
+      border-color:rgba(255,255,255,0.10);
+    }
+
+    .foot{ text-align:center; color:#8e99a3; font-size:13px; letter-spacing:.04em; margin:60px auto 12px }
+
+    /* 移动端：单列自然高度 */
+    @media (max-width:980px){
+      .grid{ grid-template-columns:1fr; gap:24px }
+      .about-photo, .aside{ height:auto; max-width:none }
+      .about-photo img{ height:auto; object-fit:contain }
+      .wrap{ padding:110px 16px 40px }
+    }
+  </style>
+</BaseLayout>
